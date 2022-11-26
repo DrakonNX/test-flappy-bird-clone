@@ -1,0 +1,23 @@
+import Matter from 'matter-js';
+
+
+// passing parameters to the physics engine 
+// dispatch allows messages to be sent from this file to the game engine, allowing us to update the game status 
+const Physics = (entities, {touches, time, dispatch}) => {
+    let engine = entities.physics.engine;
+
+    // response to touch
+    touches.filter(t => t.type === 'press')
+    .forEach(t => {
+        Matter.Body.setVelocity(entities.Bird.body, {
+            x: 0,
+            y: -8,
+        })
+    })
+
+    Matter.Engine.update(engine, time.delta);
+
+    return entities;
+}
+
+export default Physics;
